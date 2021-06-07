@@ -1,6 +1,4 @@
 from numpy.lib.polynomial import _polyint_dispatcher
-import scipy
-import math
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -20,14 +18,18 @@ def simulation_rupture_pente(points=1000,debut=0,pente1=0,pente2=0.005,std1=0.1,
     samples = np.concatenate((samples1,samples2),axis=0)+bruit
     return samples
 
-def simulation_rupture_moyenne(points=1000,mean1=0,mean2=3,std1=0.1,std2=0.1,p=0.5):
+def simulation_rupture_intermittente(points=1000,mean1=0,mean2=3,std=0.1):
     # construction et connexion de deux parties
-    samples1 = np.random.normal(mean1 , std1 , size=points)
+    samples = np.random.normal(mean1 , std , size=points)
+    sum = 0
     valeur = mean1
-    for i in range(points):
-        np.random.binomial(size=1, n=1,p=p)
-    samples2 = np.random.normal(mean2 , std2 , size=points)
-    samples = np.concatenate((samples1,samples2),axis=0)
+    total = mean1+mean2
+    while sum<points:
+        longueur = np.random.randint(15,high=250)
+        valeur = total - valeur
+        samples_add = np.random.normal(valeur , std , size=min(longueur,points-sum))
+        sum += longueur
+        samples = np.concatenate((samples,samples_add),axis=0)
     return samples
 
 def plot_signal(samples,nom):
@@ -39,5 +41,5 @@ def plot_signal(samples,nom):
     plt.show()
 
 if __name__=="__main__":
-    samples = simulation_rupture_pente(pente1= -0.005)
-    plot_signal(samples,'image/simule2.png')
+    samples = simulation_rupture_intermittente()
+    plot_signal(samples,'image/simule3.png')
