@@ -1,7 +1,7 @@
 from re import I
-
 from numpy.lib.function_base import median
 from utils import *
+
 
 
 def moyenne_ecart_type_mobile(x_time,x,d,w,delta = 1):

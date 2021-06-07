@@ -32,12 +32,25 @@ def simulation_rupture_intermittente(points=1000,mean1=0,mean2=3,std=0.1):
         samples = np.concatenate((samples,samples_add),axis=0)
     return samples
 
-def plot_signal(samples,nom):
+def simulation_rupture_moyenne_3(points=1000,mean1=0,mean2=3,mean3=0,std1=0.1,std2=0.1,std3=0.1):
+    # construction et connexion de deux parties
+    samples1 = np.random.normal(mean1 , std1 , size=points )
+    samples2 = np.random.normal(mean2 , std2 , size=points )
+    samples3 = np.random.normal(mean3 , std3 , size=points )
+    samples = np.concatenate((samples1,samples2,samples3),axis=0)
+    return samples
+
+def plot_signal(samples,save=True,nom='',x_time=None):
     plt.figure(1)
-    plt.plot(samples)
+    if x_time is not None:
+        plt.plot(x_time,samples)
+    else:
+        plt.plot(samples)
     plt.xlabel('time')
     plt.ylabel('signal')
-    plt.savefig(nom)
+    if save:
+        plt.savefig(nom)
+    plt.grid()
     plt.show()
 
 if __name__=="__main__":
