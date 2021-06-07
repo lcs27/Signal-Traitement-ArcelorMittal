@@ -199,7 +199,7 @@ def var_num_nom(nom_fichier):
 def lecture_fichier_1var(num_var):
     # Ouverture du fichier en lecture
     try:
-        fichier = open("fichier_mesures_variable_" +
+        fichier = open("data/fichier_mesures_variable_" +
                        str(num_var)+".txt", "r", encoding='utf-8')
     except:
         print('Impossible de lire le fichier', "fichier_mesures_variable_" +
@@ -223,18 +223,18 @@ def lecture_fichier_1var(num_var):
 # Début du programme principal
 # --------------------------------------------------------------------------------
 if __name__=="__main__":
-    nom_fichier = 'fichier_mesures.txt'
+    nom_fichier = 'data/fichier_mesures.txt'
 
     # Lecture du fichier de données
     x_time, x, liste_nom_variables = lecture_fichier(nom_fichier)
 
-    numero_variable = 20
-    nom_fichier = 'fichier_mesures_variable_' + str(numero_variable) + '.txt'
-    ecriture_fichier(x_time, x[:,numero_variable], nom_fichier)
+    #numero_variable = 20
+    #nom_fichier = 'fichier_mesures_variable_' + str(numero_variable) + '.txt'
+    #ecriture_fichier(x_time, x[:,numero_variable], nom_fichier)
 
-    numero_variable = 21
-    nom_fichier = 'fichier_mesures_variable_' + str(numero_variable) + '.txt'
-    ecriture_fichier(x_time, x[:,numero_variable], nom_fichier)
+    #numero_variable = 21
+    #nom_fichier = 'fichier_mesures_variable_' + str(numero_variable) + '.txt'
+    #ecriture_fichier(x_time, x[:,numero_variable], nom_fichier)
     # On enregistre dans un fichier .png un graphique qui affiche la mesure
     # et la consigne,  et un graphique qui affiche la différence entre la
     # mesure et la consigne.
