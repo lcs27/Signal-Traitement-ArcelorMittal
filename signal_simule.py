@@ -20,6 +20,16 @@ def simulation_rupture_pente(points=1000,debut=0,pente1=0,pente2=0.005,std1=0.1,
     samples = np.concatenate((samples1,samples2),axis=0)+bruit
     return samples
 
+def simulation_rupture_moyenne(points=1000,mean1=0,mean2=3,std1=0.1,std2=0.1,p=0.5):
+    # construction et connexion de deux parties
+    samples1 = np.random.normal(mean1 , std1 , size=points)
+    valeur = mean1
+    for i in range(points):
+        np.random.binomial(size=1, n=1,p=p)
+    samples2 = np.random.normal(mean2 , std2 , size=points)
+    samples = np.concatenate((samples1,samples2),axis=0)
+    return samples
+
 def plot_signal(samples,nom):
     plt.figure(1)
     plt.plot(samples)

@@ -66,19 +66,16 @@ def plot_band(x_time,y1,x_time_mobile,y2,y3,y4,labels):
     # On enregistre la figure dans un fichier png
     #nom_figure = 'figure' + '_' + nom_variable_mesure + 'moyenne_mobile.png'
     #plt.savefig(nom_figure)
-    plt.show()
+    #plt.show()
     nom_figure = 'image/figure_q6.png'
     plt.savefig(nom_figure)
 
 if __name__=="__main__":
     # Lecture du fichier de données
-    num_var = 20
-    nom_variable_mesure = var_num_nom('data/fichier_mesures.txt')[num_var]
-    x_time, x_20 = lecture_fichier_1var(num_var)
-
-    num_var = 21
-    nom_variable_consigne = var_num_nom('data/fichier_mesures.txt')[num_var]
-    x_time, x_21 = lecture_fichier_1var(num_var)
+    x_time, x_20,nom_variable_mesure = lecture_fichier('data/fichier_mesures_variable_20.txt')
+    x_time, x_21,nom_variable_consigne = lecture_fichier('data/fichier_mesures_variable_21.txt')
+    nom_variable_consigne = nom_variable_consigne[0]
+    nom_variable_mesure = nom_variable_mesure[0]
   
     x_difference = x_20 - x_21
     x_1800_time,x_1800_moyenne, x_1800_sup,x_1800_inf = moyenne_max_min_mobile(x_time,x_difference,600,1800)
