@@ -1,0 +1,43 @@
+
+name: test
+
+# Controls when the action will run. 
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  task1:
+    name: task1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Create Pull Request
+        run:
+          git config --local user.email "action@github.com"
+
+          git config --local user.name "github-actions"
+
+          git pull origin ${{github.ref}}
+      - name: Run Script
+        run: |
+          python3 ./test/test1.py
+      - name: Pull Request
+        run:
+          git pull origin ${{github.ref}}
+      - name: Commit files
+        run: |
+          git add --all
+          if [-z "$(git status --porcelain)"]; then
+             echo "::set-output name=push::false"
+          else
+             git commit -m "Run test result" -a
+             echo "::set-output name=push::true"
+          fi
+        shell: bash
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+           github_token: ${{ secrets.GITHUB_TOKEN }}
