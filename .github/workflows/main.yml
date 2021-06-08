@@ -23,7 +23,7 @@ jobs:
           git pull origin ${{github.ref}}
       - name: Run Script
         run: |
-          python3 ./test/test1.py
+          python3 GithubActionFile.py --task 1
       - name: Pull Request
         run:
           git pull origin ${{github.ref}}
