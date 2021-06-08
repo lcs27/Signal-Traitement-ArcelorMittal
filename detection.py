@@ -72,9 +72,27 @@ def coupture_mobile(x_time,x,d,w):
     return x_coupture_time,x_coupture_valeur
 
 if __name__=="__main__":
+    '''
     signal = simulation_rupture_moyenne_3()
+    plot_signal(signal,save=True,nom="image/test10.png",title='std=0,1')
     x_time = np.arange(0,len(signal))
-    x_time, x_detect = detection_AR(x_time,signal)
-    plot_signal(signal,save=False)
-    plot_signal(x_detect,save=False,x_time=x_time)
+    x_time, x_detect = detection_moyenne(x_time,signal,w=200)
+    plot_signal(x_detect,save=True,nom='image/test10_moyenne200.png',title='w=200,methode=moyenne',x_time=x_time)
+    x_time = np.arange(0,len(signal))
+    x_time, x_detect = detection_moyenne(x_time,signal,w=50)
+    plot_signal(x_detect,save=True,nom='image/test10_moyenne50.png',title='w=50,methode=moyenne',x_time=x_time)
+    x_time = np.arange(0,len(signal))
+    x_time, x_detect = detection_pente(x_time,signal,w=200)
+    plot_signal(x_detect,save=True,nom='image/test10_pente200.png',title='w=200,methode=pente',x_time=x_time)
+    x_time = np.arange(0,len(signal))
+    x_time, x_detect = detection_pente(x_time,signal,w=50)
+    plot_signal(x_detect,save=True,nom='image/test10_pente50.png',title='w=50,methode=pente',x_time=x_time)
+    x_time = np.arange(0,len(signal))
+    x_time, x_detect = detection_AR(x_time,signal,w=200)
+    plot_signal(x_detect,save=True,nom='image/test10_AR200.png',title='w=200,methode=AR',x_time=x_time)
+    x_time = np.arange(0,len(signal))
+    x_time, x_detect = detection_AR(x_time,signal,w=50)
+    plot_signal(x_detect,save=True,nom='image/test10_AR50.png',title='w=50,methode=AR',x_time=x_time)
+    '''
+
 
