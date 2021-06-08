@@ -10,6 +10,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--task', required=True, help='task number')
 args = parser.parse_args()
 task_number: int = args.task
+task_number = int(task_number)
+print(task_number)
 
 
 def test_detection(pourcentage,std,w=100,tolerance=10,nombre=250,task = 1):
