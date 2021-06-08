@@ -62,7 +62,7 @@ def comptage_resultat(changement_detecte,changement_reel,tolerance=10):
 def test_detection(pourcentage,std,w=100,tolerance=10,nombre=100):
     result = np.array([0,0,0])
     for _ in range(nombre):
-        signal,changement = simulation_rupture_moyenne_3(std1=std,std2=std,std3=std)
+        signal,changement = simulation_rupture_intermittente(std=std)
         x_time = np.arange(0,len(signal))
         x_detect_time,x_detect = detection_moyenne(x_time,signal,w=w)
         seuil = apprentissage_seuil(x_detect,pourcentage=pourcentage)
