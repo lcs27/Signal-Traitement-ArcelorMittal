@@ -21,6 +21,11 @@ def detection_variation(x_moyenne_time,x_moyenne_valeur,seuil, validation_tolera
 
     return changement
 
+def test_pass_seuil(x_valeur, seuil):
+    result = np.ones_like(x_valeur)
+    result = result * (np.array(x_valeur)>=seuil)
+    return result
+
 def comptage_resultat(changement_detecte,changement_reel,tolerance=10):
     #resultat = [nombre de bonnes détections, nombre de fausses alarmes, nombre de détections manquées]
     n, m = len(changement_detecte), len(changement_reel)
