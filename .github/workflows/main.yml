@@ -52,7 +52,6 @@ jobs:
            github_token: ${{ secrets.GITHUB_TOKEN }}
 
 
-jobs:
   task2:
     name: task2
     runs-on: ubuntu-latest
@@ -95,7 +94,6 @@ jobs:
         with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
 
-jobs:
   task3:
     name: task3
     runs-on: ubuntu-latest
@@ -138,7 +136,6 @@ jobs:
         with:
            github_token: ${{ secrets.GITHUB_TOKEN }}
 
-jobs:
   task4:
     name: task4
     runs-on: ubuntu-latest
