@@ -11,7 +11,7 @@ task_number: int = args.task
 task_number = int(task_number)
 print(task_number)
 
-result = test_prediction(nombre=250)
+result = test_prediction(nombre=1000)
 print(result)
 np.savetxt("./result/resultsC"+str(task_number)+".txt", result, fmt = '%i')
 '''
