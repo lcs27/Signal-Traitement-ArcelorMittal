@@ -11,7 +11,7 @@ def echantillonnage_brutal(samplarate,data,N):
     n = len(data)
     new_data = []
     for i in range(int(n/N)):
-        new_data.append(data[i*N])
+        new_data.append(data[i*N+int(N/2)])
     rate = samplarate // N
     return rate,new_data
 

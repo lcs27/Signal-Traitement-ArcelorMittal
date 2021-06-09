@@ -107,20 +107,21 @@ def ecriture_fichier(x_time, x, nom_fichier, nom_var):
 # --------------------------------------------------------------------------------
 
 # Lecture du fichier de données
-nom_fichier = 'data/fichier_mesures.txt'
-x_time, x, liste_nom_variables = lecture_fichier(nom_fichier)
+if __name__ == "__main__":
+    nom_fichier = 'data/fichier_mesures.txt'
+    x_time, x, liste_nom_variables = lecture_fichier(nom_fichier)
 
-# Affichage des variables
-for i in range(0, len(liste_nom_variables)):
-    # for i in range(0, 3):
-    nom_fichier = 'data/fichier_mesures_variable_' + str(i) + '.txt'
-    ecriture_fichier(x_time, x[:, i], nom_fichier, liste_nom_variables[i])
-    #print('Variable :[', i, ']', liste_nom_variables[i])
+    # Affichage des variables
+    for i in range(0, len(liste_nom_variables)):
+        # for i in range(0, 3):
+        nom_fichier = 'data/fichier_mesures_variable_' + str(i) + '.txt'
+        ecriture_fichier(x_time, x[:, i], nom_fichier, liste_nom_variables[i])
+        #print('Variable :[', i, ']', liste_nom_variables[i])
 
-    # Ecriture dans un fichier des valeurs de la variable n°20
+        # Ecriture dans un fichier des valeurs de la variable n°20
 
-'''
-for numero_variable in range(0, 85):
-    nom_fichier = 'fichier_mesures_variable_' + str(numero_variable) + '.txt'
-    ecriture_fichier(x_time, x[:, numero_variable], nom_fichier)
-'''
+    '''
+    for numero_variable in range(0, 85):
+        nom_fichier = 'fichier_mesures_variable_' + str(numero_variable) + '.txt'
+        ecriture_fichier(x_time, x[:, numero_variable], nom_fichier)
+    '''
