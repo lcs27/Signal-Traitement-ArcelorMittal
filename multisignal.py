@@ -4,7 +4,7 @@ from detection import *
 from test_detection import *
 import copy
 
-def detect2changement(x_detect,x_detect_time):
+def detect2changement(x_detect,x_detect_time,mode=0): # mode =0 : milieu, mode = 1: premier
     x_detect = np.array(x_detect) * np.array(x_detect_time)
     changement=[]
     a = []
@@ -21,7 +21,13 @@ def detect2changement(x_detect,x_detect_time):
 
     result = []
     for i in changement:
-        result.append(i[int(len(i)/2)])
+        if mode == 0:
+            result.append(i[int(len(i)/2)])
+        elif mode == 1:
+            result.append(i[0])
+        else:
+            print('Mode indéfini')
+            return None
     return result
     
 

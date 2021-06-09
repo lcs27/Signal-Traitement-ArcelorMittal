@@ -1,11 +1,9 @@
-
 name: test
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,15 +15,14 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v1
         with:
-          python-version: '3.x'
-          architecture: 'x64'
+          python-version: "3.x"
+          architecture: "x64"
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
           pip install -r requirement.txt
       - name: Create Pull Request
-        run:
-          git config --local user.email "action@github.com"
+        run: git config --local user.email "action@github.com"
 
           git config --local user.name "github-actions"
 
@@ -44,52 +41,8 @@ jobs:
           fi
         shell: bash
       - name: Pull Request
-        run:
-          git pull origin ${{github.ref}}
+        run: git pull origin ${{github.ref}}
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
-           github_token: ${{ secrets.GITHUB_TOKEN }}
-
-
-  task2:
-    name: task2
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Setup Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: '3.x'
-          architecture: 'x64'
-      - name: Install dependencies
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install -r requirement.txt
-      - name: Create Pull Request
-        run:
-          git config --local user.email "action@github.com"
-
-          git config --local user.name "github-actions"
-
-          git pull origin ${{github.ref}}
-      - name: Run Script
-        run: |
-          python3 GithubActionFile.py --task 2
-      - name: Commit files
-        run: |
-          git add --all
-          if [-z "$(git status --porcelain)"]; then
-             echo "::set-output name=push::false"
-          else
-             git commit -m "Run test result" -a
-             echo "::set-output name=push::true"
-          fi
-        shell: bash
-      - name: Pull Request
-        run:
-          git pull origin ${{github.ref}}
-      - name: Push changes
-        uses: ad-m/github-push-action@master
-        with:
-           github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
