@@ -13,7 +13,7 @@ print(task_number)
 
 result = test_prediction(nombre=1000)
 print(result)
-np.savetxt("./result/resultsC"+str(task_number)+".txt", result, fmt = '%i')
+np.savetxt("./result/resultsD"+str(task_number)+".txt", result, fmt = '%i')
 '''
 if task_number == 1:
     results = []
