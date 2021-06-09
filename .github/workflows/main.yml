@@ -43,7 +43,7 @@ jobs:
              echo "::set-output name=push::true"
           fi
         shell: bash
-          - name: Pull Request
+      - name: Pull Request
         run:
           git pull origin ${{github.ref}}
       - name: Push changes
