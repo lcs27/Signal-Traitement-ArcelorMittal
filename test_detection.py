@@ -3,11 +3,12 @@ from signal_simule import *
 from math import *
 import numpy as np
 
-def apprentissage_seuil(x_detect,pourcentage=0.9,multiple=1):
+def apprentissage_seuil(x_detect,pourcentage=0.9,multiple=3):
     n = len(x_detect)
     k = int(pourcentage*n)
-    sigma = (np.partition(x_detect,k-1))[k-1]
-    return sigma*multiple
+    k_premier = (np.partition(x_detect,k-1))[:(k-1)]
+    sigma = np.std(k_premier)
+    return sigma*multiple + np.mean(k_premier)
 
 def detection_variation(x_moyenne_time,x_moyenne_valeur,seuil, validation_tolerance=21):
     changement = []

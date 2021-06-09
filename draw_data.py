@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
-results = np.loadtxt('./result/results.txt')
-conditions = np.loadtxt('./result/conditions.txt')
+'''
+results = np.loadtxt('./result/resultsA1.txt')
+conditions = np.loadtxt('./result/conditionsA1.txt')
 
 
 def draw_figure(fig,ax,conditions,results,pourcentage = 0.8,w = 100,tolerance = 10,color = 'b'):
@@ -33,4 +33,31 @@ ax[1].set_ylabel('taux')
 ax[1].set_title('Fausse Alarm%')
 ax[0].legend(fontsize=5)
 ax[1].grid()
+plt.show()
+'''
+
+results = np.loadtxt('./result/resultsD1.txt')
+'''
+fig, ax = plt.subplots(1, 1)
+ax.plot(np.arange(3,21),results[3]/(results[3]+results[5]),label='Bonne detection%',linewidth=1)
+ax.plot(np.arange(3,21),results[4]/results[3],label='Fausse Alarm%',linewidth=1)
+ax.set_ylabel('taux')
+ax.grid()
+ax.set_title('Prediction')
+ax.set_xlabel('sigma')
+ax.legend(fontsize=5)
+plt.show()
+'''
+fig, ax = plt.subplots()
+ax.plot(np.arange(3,21), results[0], color = 'b', linewidth = 2,label='moyenne')
+print("Plot 1er réussite")
+ax.plot(np.arange(3,21), results[1], color='r', linewidth = 1,label='max')
+print("Plot 2e réussite")
+ax.plot(np.arange(3,21), results[2], color='k', linewidth = 1,label='min')
+ax.fill_between(np.arange(3,21),results[1],results[2],facecolor='silver')
+
+ax.set(xlabel='sigma', ylabel='retard')
+
+ax.legend(fontsize=5)
+ax.grid()
 plt.show()
