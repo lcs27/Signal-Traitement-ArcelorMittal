@@ -1,8 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-results = np.loadtxt('./result/results.txt')
-conditions = np.loadtxt('./result/conditions.txt')
+results = np.loadtxt('./result/resultsA1.txt')
+conditions = np.loadtxt('./result/conditionsA1.txt')
 
 
 def draw_figure(fig,ax,conditions,results,pourcentage = 0.8,w = 100,tolerance = 10,color = 'b'):

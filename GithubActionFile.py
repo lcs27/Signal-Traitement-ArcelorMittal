@@ -1,8 +1,5 @@
 # This test contains the test about the 
-from signal_simule import *
-from detection import *
-from test_detection import detection_variation,apprentissage_seuil,comptage_resultat
-import numpy as np
+from multisignal import *
 import argparse
 
 # To get the name of task
@@ -13,7 +10,29 @@ task_number: int = args.task
 task_number = int(task_number)
 print(task_number)
 
-
+if task_number == 1:
+    results = []
+    conditions = []
+    for std in [0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6]:
+        for mode in [1,2,3]:
+                result = test_multivote_moyenne(std=std,mode=mode,nombre=100)
+                print([std,mode,100,0.7,5],result)
+                conditions.append([std,mode,100,0.7,5])
+                results.append(result)
+    np.savetxt("./result/conditionsB"+str(task_number)+".txt",conditions,fmt='%10.5f')
+    np.savetxt("./result/resultsB"+str(task_number)+".txt",results,fmt='%i')
+elif task_number == 2:
+    results = []
+    conditions = []
+    for std in [0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6]:
+        for mode in [1,2,3]:
+                result = test_multivote_coupture(std=std,mode=mode,nombre=100)
+                print([std,mode,100,0.7,5],result)
+                conditions.append([std,mode,100,0.7,5])
+                results.append(result)
+    np.savetxt("./result/conditionsB"+str(task_number)+".txt",conditions,fmt='%10.5f')
+    np.savetxt("./result/resultsB"+str(task_number)+".txt",results,fmt='%i')
+'''
 def test_detection(pourcentage,std,w=100,tolerance=10,nombre=250,task = 1):
     result = np.array([0,0,0])
     for _ in range(nombre):
@@ -51,5 +70,4 @@ else:
                     print([pourcentage,std,w,tolerance],result)
                     conditions.append([pourcentage,std,w,tolerance])
                     results.append(result)
-np.savetxt("./result/conditionsA"+str(task_number)+".txt",conditions,fmt='%10.5f')
-np.savetxt("./result/resultsA"+str(task_number)+".txt",results,fmt='%i')
+'''
