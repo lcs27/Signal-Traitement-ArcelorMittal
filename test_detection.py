@@ -32,7 +32,8 @@ def comptage_resultat(changement_detecte,changement_reel,tolerance=10):
     n, m = len(changement_detecte), len(changement_reel)
     resultat = [0,0,0]
     j, i = 0, 0
-    
+    if n == 0:
+        return [0,0,m]
     while i + j < (n + m-1):
         #print(i,j)
         if changement_detecte[i] - tolerance <= changement_reel[j] <= changement_detecte[i] + tolerance:
