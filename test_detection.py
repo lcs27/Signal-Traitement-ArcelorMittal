@@ -21,6 +21,11 @@ def detection_variation(x_moyenne_time,x_moyenne_valeur,seuil, validation_tolera
 
     return changement
 
+def test_pass_seuil(x_valeur, seuil):
+    result = np.ones_like(x_valeur)
+    result = result * (np.array(x_valeur)>=seuil)
+    return result
+
 def comptage_resultat(changement_detecte,changement_reel,tolerance=10):
     #resultat = [nombre de bonnes détections, nombre de fausses alarmes, nombre de détections manquées]
     n, m = len(changement_detecte), len(changement_reel)
@@ -57,7 +62,7 @@ def comptage_resultat(changement_detecte,changement_reel,tolerance=10):
 def test_detection(pourcentage,std,w=100,tolerance=10,nombre=100):
     result = np.array([0,0,0])
     for _ in range(nombre):
-        signal,changement = simulation_rupture_moyenne_3(std1=std,std2=std,std3=std)
+        signal,changement = simulation_rupture_intermittente(std=std)
         x_time = np.arange(0,len(signal))
         x_detect_time,x_detect = detection_moyenne(x_time,signal,w=w)
         seuil = apprentissage_seuil(x_detect,pourcentage=pourcentage)
