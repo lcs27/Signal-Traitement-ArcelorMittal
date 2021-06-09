@@ -68,7 +68,7 @@ def test_detection(pourcentage,std,w=100,tolerance=10,nombre=100):
 if __name__=="__main__":
     results = []
     conditions = []
-    for pourcentage in [0.7,0.8,0.9]:
+    for pourcentage in [0.9]:
         for std in [0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6]:
             for w in [50,100,200]:
                 for tolerance in [10,15,20]:
