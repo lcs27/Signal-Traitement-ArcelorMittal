@@ -32,7 +32,7 @@ jobs:
           python3 GithubActionFile.py --task 1
       - name: Commit files
         run: |
-          git add *.txt
+          git add ./result/*.txt
           if [-z "$(git status --porcelain)"]; then
              echo "::set-output name=push::false"
           else
@@ -72,7 +72,7 @@ jobs:
           python3 GithubActionFile.py --task 2
       - name: Commit files
         run: |
-          git add *.txt
+          git add ./result/*.txt
           if [-z "$(git status --porcelain)"]; then
              echo "::set-output name=push::false"
           else

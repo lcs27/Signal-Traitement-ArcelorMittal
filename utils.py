@@ -219,6 +219,10 @@ def lecture_fichier_1var(num_var):
     print('Lecture Réussite')
     return x_time, np.array(x)
 
+def datatime2int(time):
+    pass 
+#return 24*3600*(time.day-24)+3600*time.hour+60*time.min
+
 # ----------------------------------------------------------------------------------
 # Début du programme principal
 # --------------------------------------------------------------------------------
