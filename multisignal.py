@@ -31,7 +31,7 @@ def detect2changement(x_detect,x_detect_time,mode=0): # mode =0 : milieu, mode =
     return result
     
 
-def vote_majoritaire_moyenne(signaux,x_time,mode=1,w=100,pourcentage = 0.9,tolerance = 10):
+def vote_majoritaire_moyenne(signaux,x_time,mode=1,w=100,multiple=3,tolerance = 10):
     m = len(signaux)
     if mode == 1:
         v = m
@@ -45,7 +45,7 @@ def vote_majoritaire_moyenne(signaux,x_time,mode=1,w=100,pourcentage = 0.9,toler
     x_pass = []
     for signal in signaux:
         x_detect_time,x_detect = detection_moyenne(x_time,signal,w=w)
-        seuil = apprentissage_seuil(x_detect,pourcentage= pourcentage)
+        seuil = apprentissage_seuil(x_detect,multiple=multiple)
         x_pass.append(test_pass_seuil(x_detect,seuil))
     x_pass = np.sum(x_pass,axis=0)
     x_detect = test_pass_seuil(x_pass, v)
@@ -54,7 +54,7 @@ def vote_majoritaire_moyenne(signaux,x_time,mode=1,w=100,pourcentage = 0.9,toler
     changement_detect = detect2changement(x_detect,x_detect_time)
     return changement_detect
 
-def vote_majoritaire_coupture(signaux,x_time,mode=1,w=100,pourcentage = 0.9,tolerance = 10):
+def vote_majoritaire_coupture(signaux,x_time,mode=1,w=100,multiple=3,tolerance = 10):
     m = len(signaux)
     if mode == 1:
         v = m
@@ -68,7 +68,7 @@ def vote_majoritaire_coupture(signaux,x_time,mode=1,w=100,pourcentage = 0.9,tole
     x_pass = []
     for signal in signaux:
         x_detect_time,x_detect = detection_coupture(x_time,signal,w=w)
-        seuil = apprentissage_seuil(x_detect,pourcentage= pourcentage)
+        seuil = apprentissage_seuil(x_detect,multiple=multiple)
         x_pass.append(test_pass_seuil(x_detect,seuil))
     x_pass = np.sum(x_pass,axis=0)
     x_detect = test_pass_seuil(x_pass, v)
@@ -99,7 +99,7 @@ def lissage(changement,tolerance=10):
     result.append(precedent)
 '''
 
-def test_multivote_moyenne(std,mode=1,nombre=100):
+def test_multivote_moyenne(std,mode=1,nombre=100,tolerance=0.5):
     result = np.array([0,0,0])
     for _ in range(nombre):
         signal1,changement = simulation_rupture_moyenne_3(mean2=3,std1=std,std2=std,std3=std)
@@ -110,13 +110,13 @@ def test_multivote_moyenne(std,mode=1,nombre=100):
         signaux = [signal1,signal2,signal3,signal4,signal5]
         x_time = np.arange(0,len(signal1))
 
-        changement_detect = vote_majoritaire_moyenne(signaux,x_time,mode = mode,w = 100,pourcentage=0.7,tolerance=5)
+        changement_detect = vote_majoritaire_moyenne(signaux,x_time,mode = mode,w = 100,multiple=3,tolerance=tolerance)
 
         result += np.array(comptage_resultat(changement_detect,changement))
     return result
 
 
-def test_multivote_coupture(std,mode=1,nombre=100):
+def test_multivote_coupture(std,mode=1,nombre=100,tolerance=5):
     result = np.array([0,0,0])
     for _ in range(nombre):
         signal1,changement = simulation_rupture_pente(pente2=0.005,std1=std,std2=std)
@@ -127,7 +127,7 @@ def test_multivote_coupture(std,mode=1,nombre=100):
         signaux = [signal1,signal2,signal3,signal4,signal5]
         x_time = np.arange(0,len(signal1))
 
-        changement_detect = vote_majoritaire_coupture(signaux,x_time,mode = mode,w = 100,pourcentage=0.7,tolerance=5)
+        changement_detect = vote_majoritaire_coupture(signaux,x_time,mode = mode,w = 100,multiple=3,tolerance=tolerance)
 
         result += np.array(comptage_resultat(changement_detect,changement))
     return result
@@ -138,12 +138,13 @@ if __name__ == "__main__":
     conditions = []
     for std in [0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6]:
         for mode in [1,2,3]:
-                result = test_multivote(std=std,mode=mode,nombre=2)
-                print([std,mode,100,0.7,5],result)
-                conditions.append([std,mode,100,0.7,5])
+            for tolerance in [0,5]:
+                result = test_multivote_moyenne(std=std,mode=mode,nombre=100,tolerance = tolerance)
+                print([std,mode,100,3,tolerance],result)
+                conditions.append([std,mode,100,3,tolerance])
                 results.append(result)
-    np.savetxt("./result/conditionsB1.txt",conditions,fmt='%10.5f')
-    np.savetxt("./result/resultsB1.txt",results,fmt='%d')
+    np.savetxt("./result/conditionsG1.txt",conditions,fmt='%10.5f')
+    np.savetxt("./result/resultsG1.txt",results,fmt='%d')
 
 
     

@@ -72,6 +72,20 @@ def coupture_mobile(x_time,x,d,w):
     return x_coupture_time,x_coupture_valeur
 
 if __name__=="__main__":
+    signal,_ = simulation_rupture_moyenne_3()
+    x_moyenne_time,x_moyenne=AR_mobile(np.arange(start=0,stop=len(signal)),signal,1,100)
+    d2=100
+    x_moyenne_decale = np.array(x_moyenne[d2:])
+    x_moyenne = np.array(x_moyenne[:-d2])
+    fig2, ax2 = plt.subplots(1, 1)
+    
+    ax2.plot(x_moyenne_time[d2//2:-d2//2],abs(x_moyenne_decale))
+    ax2.plot(x_moyenne_time[d2//2:-d2//2],abs(x_moyenne))
+    ax2.set_xlabel('time')
+    ax2.set_ylabel('AR')
+    ax2.grid()
+    plt.show()
+
     '''
     signal = simulation_rupture_moyenne_3()
     plot_signal(signal,save=True,nom="image/test10.png",title='std=0,1')
