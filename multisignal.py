@@ -77,6 +77,29 @@ def vote_majoritaire_coupture(signaux,x_time,mode=1,w=100,multiple=3,tolerance =
     changement_detect = detect2changement(x_detect,x_detect_time)
     return changement_detect
 
+def vote_majoritaire_AR(signaux,x_time,mode=1,w=100,multiple=3,tolerance = 10):
+    m = len(signaux)
+    if mode == 1:
+        v = m
+    elif mode == 2:
+        v = m - 1
+    elif mode == 3:
+        v = int(m/2) + 1
+    else:
+        print('Mode indéfini')
+        return None
+    x_pass = []
+    for signal in signaux:
+        x_detect_time,x_detect = detection_AR(x_time,signal,w=w)
+        seuil = apprentissage_seuil(x_detect,multiple=multiple)
+        x_pass.append(test_pass_seuil(x_detect,seuil))
+    x_pass = np.sum(x_pass,axis=0)
+    x_detect = test_pass_seuil(x_pass, v)
+    if tolerance != 0:
+        x_detect= detect_lissage(x_detect,tolerance = tolerance)
+    changement_detect = detect2changement(x_detect,x_detect_time)
+    return changement_detect
+
 def detect_lissage(x_detect,tolerance=10):
     x_lissage = np.ones_like(x_detect)
     n = len(x_detect)

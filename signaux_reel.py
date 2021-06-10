@@ -1,4 +1,4 @@
-from multisignal import vote_majoritaire_moyenne
+from multisignal import vote_majoritaire_moyenne, vote_majoritaire_AR
 import matplotlib.pyplot as plt
 from utils import *
 from echantillonnage import *
@@ -37,8 +37,8 @@ fault_time_steps = []
 for i in range(42):
     nom_fichier = 'data/ecart_'+str(i)+'_echan.txt'
     x_time, x, nom_variable = lecture_fichier(nom_fichier)
-
-    time_index, x_detect = detection_moyenne(
+    x = [abs(i[0]) for i in x]
+    time_index, x_detect = detection_AR(
         np.arange(start=0, stop=len(x)), x, w=50)
     seuil = apprentissage_seuil(x_detect, multiple=3)
     time_index = detection_variation(
@@ -52,9 +52,7 @@ for i in range(42):
     time_index = time_index.tolist()
     #x_time = np.array(x_time)
     #changement_detecte = x_time[time_index]
-    for j in time_index:
-        variable_index.append(i)
-        fault_time_steps.append(j)
+
 # print(type(resultat))
 #np.savetxt("./result/signaux_reel_mul3.txt", resultat, fmt='%s')
 
@@ -63,9 +61,9 @@ for i in range(42):
         fault_time_steps.append(j)
 
     resultat.append(time_index)
-    print(i,time_index)
+    print(i, time_index)
 print(resultat)
-np.savetxt("./result/signaux_reel_mul3.txt",resultat,fmt='%s')
+np.savetxt("./result/signaux_reel_AR3.txt", resultat, fmt='%s')
 
 plt.scatter(fault_time_steps, variable_index)
 plt.grid()
@@ -76,16 +74,16 @@ plt.show()
 
 '''
 
-
 signaux = []
 for i in range(42):
     nom_fichier = 'data/ecart_'+str(i)+'_echan.txt'
     x_time, x, nom_variable = lecture_fichier(nom_fichier)
+    x = [abs(i[0]) for i in x]
     signaux.append(x)
 
-for multiple in [2, 3, 4, 5]:
-    for tolerance in [0, 1, 2, 3, 4, 5]:
-        changement_detect = vote_majoritaire_moyenne(signaux, np.arange(
-            start=0, stop=len(x)), mode=3, w=50, multiple=2, tolerance=5)
+for multiple in [2, ]:
+    for tolerance in [0, 1]:
+        changement_detect = vote_majoritaire_AR(signaux, np.arange(
+            start=0, stop=len(x)), mode=3, w=50, multiple=multiple, tolerance=tolerance)
 
-        print(changement_detect)
+        print(multiple,tolerance,changement_detect)
