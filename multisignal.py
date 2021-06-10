@@ -99,7 +99,7 @@ def lissage(changement,tolerance=10):
     result.append(precedent)
 '''
 
-def test_multivote_moyenne(std,mode=1,nombre=100,tolerance=0.5):
+def test_multivote_moyenne(std,mode=1,nombre=100,tolerance=5):
     result = np.array([0,0,0])
     for _ in range(nombre):
         signal1,changement = simulation_rupture_moyenne_3(mean2=3,std1=std,std2=std,std3=std)
@@ -139,12 +139,12 @@ if __name__ == "__main__":
     for std in [0.1,0.15,0.2,0.25,0.3,0.35,0.4,0.45,0.5,0.55,0.6]:
         for mode in [1,2,3]:
             for tolerance in [0,5]:
-                result = test_multivote_moyenne(std=std,mode=mode,nombre=100,tolerance = tolerance)
+                result = test_multivote_coupture(std=std,mode=mode,nombre=100,tolerance = tolerance)
                 print([std,mode,100,3,tolerance],result)
                 conditions.append([std,mode,100,3,tolerance])
                 results.append(result)
-    np.savetxt("./result/conditionsG1.txt",conditions,fmt='%10.5f')
-    np.savetxt("./result/resultsG1.txt",results,fmt='%d')
+    np.savetxt("./result/conditionsH1.txt",conditions,fmt='%10.5f')
+    np.savetxt("./result/resultsH1.txt",results,fmt='%d')
 
 
     
