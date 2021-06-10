@@ -112,7 +112,7 @@ if __name__ == "__main__":
     x_time, x, liste_nom_variables = lecture_fichier(nom_fichier)
 
     # Affichage des variables
-    for i in range(0, len(liste_nom_variables)):
+    for i in range(8,9):
         # for i in range(0, 3):
         nom_fichier = 'data/fichier_mesures_variable_' + str(i) + '.txt'
         ecriture_fichier(x_time, x[:, i], nom_fichier, liste_nom_variables[i])

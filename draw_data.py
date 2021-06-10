@@ -34,10 +34,10 @@ ax[1].set_title('Fausse Alarm%')
 ax[0].legend(fontsize=5)
 ax[1].grid()
 plt.show()
-'''
+
 
 results = np.loadtxt('./result/resultsD1.txt')
-'''
+
 fig, ax = plt.subplots(1, 1)
 ax.plot(np.arange(3,21),results[3]/(results[3]+results[5]),label='Bonne detection%',linewidth=1)
 ax.plot(np.arange(3,21),results[4]/results[3],label='Fausse Alarm%',linewidth=1)
@@ -47,7 +47,7 @@ ax.set_title('Prediction')
 ax.set_xlabel('sigma')
 ax.legend(fontsize=5)
 plt.show()
-'''
+
 fig, ax = plt.subplots()
 ax.plot(np.arange(3,21), results[0], color = 'b', linewidth = 2,label='moyenne')
 print("Plot 1er réussite")
@@ -60,4 +60,48 @@ ax.set(xlabel='sigma', ylabel='retard')
 
 ax.legend(fontsize=5)
 ax.grid()
+plt.show()
+'''
+results = np.loadtxt('./result/resultsF1.txt')
+
+
+def draw_figure(fig,ax,fig2,ax2,results,multiple = 3,w = 100,tolerance = 10,color = 'b',marker='o'):
+    x = []
+    bonne_detect = []
+    fausse_alarm = []
+    for i in range(len(results)):
+        if results[i][0] == multiple and results[i][2] == w and results[i][3] == tolerance:
+            x.append(results[i][1])
+            bonne_detect.append(results[i][4]/(results[i][4]+results[i][6]))
+            fausse_alarm.append(results[i][5]/(results[i][4]+results[i][6]))
+
+    ax[0].plot(x,bonne_detect,color=color,label='multiple = '+str(multiple)+',w='+str(w)+',tolerance='+str(tolerance),linewidth=1,marker=marker)
+    ax[1].plot(x,fausse_alarm,color=color,label='multiple = '+str(multiple)+',w='+str(w)+',tolerance='+str(tolerance),linewidth=1,marker=marker)
+    ax2.plot(bonne_detect,fausse_alarm,color=color,label='multiple = '+str(multiple)+',w='+str(w)+',tolerance='+str(tolerance),linewidth=1,marker=marker)
+    
+colors = ['b','g','r','c','m','y','gray','brown','blueviolet','darkorange']
+linestyle = ['dashed',]
+markers = [".",'1','|','x']
+fig, ax = plt.subplots(2, 1,sharex=True)
+fig2, ax2 = plt.subplots(1, 1)
+k=0
+for multiple in [3,5,7,9,11,15,20]:
+    color = colors[k]
+    k+=1
+    for w in [50,100,200]:
+        marker = markers[w//50-1]
+        for tolerance in [10]:
+            draw_figure(fig,ax,fig2,ax2,results,multiple=multiple,w = w,tolerance = tolerance,color=color,marker = marker)
+ax[0].set_ylabel('taux')
+ax[0].grid()
+ax[0].set_title('Bonne detection%')
+ax[1].set_xlabel('sigma')
+ax[1].set_ylabel('taux')
+ax[1].set_title('Fausse Alarm%')
+ax[0].legend(fontsize=3,loc=0)
+ax[1].grid()
+ax2.set_xlabel('Bonne detection%')
+ax2.set_ylabel('Fausse Alarm%')
+ax2.legend(fontsize=5,loc=0)
+ax2.grid()
 plt.show()
