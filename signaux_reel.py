@@ -1,10 +1,11 @@
+from multisignal import vote_majoritaire_moyenne
+import matplotlib.pyplot as plt
 from utils import *
 from echantillonnage import *
 import write_data
 from detection import *
 from test_detection import *
-import matplotlib.pyplot as plt
-################Cette partie sert à échantillonnage et est déjà fait#################
+
 
 '''
 nbr_donne = 83
@@ -29,10 +30,10 @@ for i in range(4,(nbr_donne+1)//2):
     x_difference = [i[0] for i in x_difference]
     write_data.ecriture_fichier(x_time,x_difference,'data/ecart_'+str(i)+'_echan.txt',nom_variable1[0]+' - '+nom_variable2[0])
 '''
-
-#resultat = []
-points = []
-
+'''
+resultat = []
+variable_index = []
+fault_time_steps = []
 for i in range(42):
     nom_fichier = 'data/ecart_'+str(i)+'_echan.txt'
     x_time, x, nom_variable = lecture_fichier(nom_fichier)
@@ -57,10 +58,34 @@ for i in range(42):
 # print(type(resultat))
 #np.savetxt("./result/signaux_reel_mul3.txt", resultat, fmt='%s')
 
-# print(points)
+    for j in time_index:
+        variable_index.append(i)
+        fault_time_steps.append(j)
+
+    resultat.append(time_index)
+    print(i,time_index)
+print(resultat)
+np.savetxt("./result/signaux_reel_mul3.txt",resultat,fmt='%s')
+
 plt.scatter(fault_time_steps, variable_index)
 plt.grid()
 plt.title('Fault detection')
 plt.xlabel('Time step')
 plt.ylabel('Variable index')
 plt.show()
+
+'''
+
+
+signaux = []
+for i in range(42):
+    nom_fichier = 'data/ecart_'+str(i)+'_echan.txt'
+    x_time, x, nom_variable = lecture_fichier(nom_fichier)
+    signaux.append(x)
+
+for multiple in [2, 3, 4, 5]:
+    for tolerance in [0, 1, 2, 3, 4, 5]:
+        changement_detect = vote_majoritaire_moyenne(signaux, np.arange(
+            start=0, stop=len(x)), mode=3, w=50, multiple=2, tolerance=5)
+
+        print(changement_detect)
