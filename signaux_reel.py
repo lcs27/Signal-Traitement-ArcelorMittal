@@ -1,12 +1,11 @@
+from multisignal import vote_majoritaire_moyenne, vote_majoritaire_AR, vote_majoritaire_pente
+import matplotlib.pyplot as plt
 from utils import *
 from echantillonnage import *
 import write_data
 from detection import *
 from test_detection import *
-from multisignal import vote_majoritaire_moyenne
-import matplotlib.pyplot as plt
 
-################Cette partie sert à échantillonnage et est déjà fait#################
 
 '''
 nbr_donne = 83
@@ -37,30 +36,34 @@ variable_index = []
 fault_time_steps = []
 for i in range(42):
     nom_fichier = 'data/ecart_'+str(i)+'_echan.txt'
-    x_time,x,nom_variable=lecture_fichier(nom_fichier)
+    x_time, x, nom_variable = lecture_fichier(nom_fichier)
+    x = [abs(i[0]) for i in x]
+    time_index, x_detect = detection_AR(
+        np.arange(start=0, stop=len(x)), x, w=50)
+    seuil = apprentissage_seuil(x_detect, multiple=3)
+    time_index = detection_variation(
+        time_index, x_detect, seuil, validation_tolerance=2*10)
 
+    # plot_signal(x_detect,save=False,title=nom_variable[0],x_time=x_time)
 
-    time_index, x_detect = detection_moyenne(np.arange(start=0,stop=len(x)),x,w=50)
-    seuil = apprentissage_seuil(x_detect,multiple=3)
-    time_index = detection_variation(time_index,x_detect,seuil,validation_tolerance=2*10)
-
-    #plot_signal(x_detect,save=False,title=nom_variable[0],x_time=x_time)
-
-    #### Transformer index aux temps
-    time_index=np.array(time_index)
-    time_index=time_index.astype(int)
-    time_index=time_index.tolist()
+    # Transformer index aux temps
+    time_index = np.array(time_index)
+    time_index = time_index.astype(int)
+    time_index = time_index.tolist()
     #x_time = np.array(x_time)
     #changement_detecte = x_time[time_index]
+
+# print(type(resultat))
+#np.savetxt("./result/signaux_reel_mul3.txt", resultat, fmt='%s')
 
     for j in time_index:
         variable_index.append(i)
         fault_time_steps.append(j)
 
     resultat.append(time_index)
-    print(i,time_index)
+    print(i, time_index)
 print(resultat)
-np.savetxt("./result/signaux_reel_mul3.txt",resultat,fmt='%s')
+np.savetxt("./result/signaux_reel_AR3.txt", resultat, fmt='%s')
 
 plt.scatter(fault_time_steps, variable_index)
 plt.grid()
@@ -71,15 +74,16 @@ plt.show()
 
 '''
 
-
 signaux = []
 for i in range(42):
     nom_fichier = 'data/ecart_'+str(i)+'_echan.txt'
-    x_time,x,nom_variable=lecture_fichier(nom_fichier)
+    x_time, x, nom_variable = lecture_fichier(nom_fichier)
+    x = [abs(i[0]) for i in x]
     signaux.append(x)
 
-for multiple in [2,3,4,5]:
-    for tolerance in [0,1,2,3,4,5]:
-        changement_detect = vote_majoritaire_moyenne(signaux,np.arange(start=0,stop=len(x)),mode = 3,w = 50,multiple=2,tolerance=5)
+for multiple in [2, 3, 4, 5]:
+    for tolerance in [0, 1, 5, 10]:
+        changement_detect = vote_majoritaire_pente(signaux, np.arange(
+            start=0, stop=len(x)), mode=3, w=50, multiple=multiple, tolerance=tolerance)
 
-        print(changement_detect)
+        print(multiple,tolerance,changement_detect)
