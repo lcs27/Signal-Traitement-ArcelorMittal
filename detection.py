@@ -119,7 +119,7 @@ if __name__ == "__main__":
                 title='w=50,methode=pente', x_time=x_time)
     x_time = np.arange(0, len(signal))
     '''
-    x_time, x_detect = detection_AR(x_time, signal, w=200)
+    x_time, x_detect = detection_coupture(x_time, signal, w=100)
     print(x_detect)
     plot_signal(x_detect, save=False, title='w=200,methode=AR', x_time=x_time)
     x_time = np.arange(0, len(signal))

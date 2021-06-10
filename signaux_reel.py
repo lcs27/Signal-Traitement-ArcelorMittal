@@ -30,7 +30,7 @@ for i in range(4,(nbr_donne+1)//2):
     x_difference = [i[0] for i in x_difference]
     write_data.ecriture_fichier(x_time,x_difference,'data/ecart_'+str(i)+'_echan.txt',nom_variable1[0]+' - '+nom_variable2[0])
 '''
-'''
+
 resultat = []
 variable_index = []
 fault_time_steps = []
@@ -38,7 +38,7 @@ for i in range(42):
     nom_fichier = 'data/ecart_'+str(i)+'_echan.txt'
     x_time, x, nom_variable = lecture_fichier(nom_fichier)
     x = [abs(i[0]) for i in x]
-    time_index, x_detect = detection_AR(
+    time_index, x_detect = detection_pente(
         np.arange(start=0, stop=len(x)), x, w=50)
     seuil = apprentissage_seuil(x_detect, multiple=3)
     time_index = detection_variation(
@@ -63,7 +63,7 @@ for i in range(42):
     resultat.append(time_index)
     print(i, time_index)
 print(resultat)
-np.savetxt("./result/signaux_reel_AR3.txt", resultat, fmt='%s')
+np.savetxt("./result/signaux_reel_pente3.txt", resultat, fmt='%s')
 
 plt.scatter(fault_time_steps, variable_index)
 plt.grid()
@@ -72,8 +72,8 @@ plt.xlabel('Time step')
 plt.ylabel('Variable index')
 plt.show()
 
-'''
 
+'''
 signaux = []
 for i in range(42):
     nom_fichier = 'data/ecart_'+str(i)+'_echan.txt'
@@ -87,3 +87,4 @@ for multiple in [2, 3, 4, 5]:
             start=0, stop=len(x)), mode=3, w=50, multiple=multiple, tolerance=tolerance)
 
         print(multiple,tolerance,changement_detect)
+'''
