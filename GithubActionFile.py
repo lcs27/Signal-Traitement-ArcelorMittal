@@ -69,7 +69,7 @@ for multiple in [3,5,7,9,11,15,20]:
         for w in [50,100,200]:
             for tolerance in [10,15,20]:
                 result = multitask_test_detection(
-                    multiple,std,w=w,tolerance=tolerance,nombre=40,task = task_number)
+                    multiple,std,w=w,tolerance=tolerance,nombre=60,task = task_number)
                 print([multiple,std,w,tolerance],result)
                 conditions.append([multiple,std,w,tolerance])
                 results.append(result)
