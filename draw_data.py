@@ -117,7 +117,7 @@ results = np.loadtxt('./result/resultsG1.txt')
 conditions = np.loadtxt('./result/conditionsG1.txt')
 
 
-def draw_figure(fig,ax,conditions,results,mode,tolerance = 10,color = 'b',marker='.'):
+def draw_figure(fig,ax,ax2,conditions,results,mode,tolerance = 10,color = 'b',marker='.'):
     x = []
     bonne_detect = []
     fausse_alarm = []
@@ -125,19 +125,21 @@ def draw_figure(fig,ax,conditions,results,mode,tolerance = 10,color = 'b',marker
         if conditions[i][1] == mode and conditions[i][4] == tolerance:
             x.append(conditions[i][0])
             bonne_detect.append(results[i][0]/(results[i][0]+results[i][2]))
-            fausse_alarm.append(results[i][1]/(results[i][0]))
+            fausse_alarm.append(results[i][1]/(results[i][0]+results[i][2]))
 
     ax[0].plot(x,bonne_detect,color=color,label='mode'+str(mode)+',erosion='+str((tolerance == 5)),linewidth=1,marker=marker)
     ax[1].plot(x,fausse_alarm,color=color,label='mode'+str(mode)+',erosion='+str((tolerance == 5)),linewidth=1,marker=marker)
+    ax2.plot(bonne_detect,fausse_alarm,color=color,label='mode'+str(mode)+',erosion='+str((tolerance == 5)),linewidth=1,marker=marker)
 
     
 color = ['b','g','r','c','m','y','gray','brown','blueviolet','darkorange']
 markers = ["+",'x','.','1']
 fig, ax = plt.subplots(2, 1,sharex=True)
+fig2, ax2 = plt.subplots(1, 1)
 for mode in [1,2,3]:
     for tolerance in [0,5]:
         marker = markers[tolerance//5]
-        draw_figure(fig,ax,conditions,results,mode=mode,tolerance=tolerance,color=color.pop(),marker=marker)
+        draw_figure(fig,ax,ax2,conditions,results,mode=mode,tolerance=tolerance,color=color.pop(),marker=marker)
 ax[0].set_ylabel('taux')
 ax[0].grid()
 ax[0].set_title('Bonne detection%')
@@ -146,4 +148,10 @@ ax[1].set_ylabel('taux')
 ax[1].set_title('Fausse Alarm%')
 ax[0].legend(fontsize=5)
 ax[1].grid()
+
+ax2.set_xlabel('Bonne detection%')
+ax2.set_ylabel('Fausse Alarm%')
+ax2.legend(fontsize=5,loc=0)
+ax2.grid()
+plt.axis([-6,6,-10,10])
 plt.show()
