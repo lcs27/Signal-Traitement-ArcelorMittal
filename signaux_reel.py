@@ -1,4 +1,4 @@
-from multisignal import vote_majoritaire_moyenne, vote_majoritaire_AR
+from multisignal import vote_majoritaire_moyenne, vote_majoritaire_AR, vote_majoritaire_pente
 import matplotlib.pyplot as plt
 from utils import *
 from echantillonnage import *
@@ -81,9 +81,9 @@ for i in range(42):
     x = [abs(i[0]) for i in x]
     signaux.append(x)
 
-for multiple in [2, ]:
-    for tolerance in [0, 1]:
-        changement_detect = vote_majoritaire_AR(signaux, np.arange(
+for multiple in [2, 3, 4, 5]:
+    for tolerance in [0, 1, 5, 10]:
+        changement_detect = vote_majoritaire_pente(signaux, np.arange(
             start=0, stop=len(x)), mode=3, w=50, multiple=multiple, tolerance=tolerance)
 
         print(multiple,tolerance,changement_detect)
