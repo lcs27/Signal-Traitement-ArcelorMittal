@@ -37,7 +37,7 @@ for i in range(42):
 
     time_index, x_detect = detection_moyenne(np.arange(start=0,stop=len(x)),x,w=50)
     seuil = apprentissage_seuil(x_detect,multiple=3)
-    time_index = detection_variation(time_index,x_detect,seuil,validation_tolerance=2*1)
+    time_index = detection_variation(time_index,x_detect,seuil,validation_tolerance=2*10)
 
     #plot_signal(x_detect,save=False,title=nom_variable[0],x_time=x_time)
 
