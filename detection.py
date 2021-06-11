@@ -2,7 +2,7 @@ from moyenne_mobile import moyenne_ecart_type_mobile
 from signal_simule import *
 import nitime
 
-
+### Ce document sert à calculer plusieurs caractéristiques de signaux
 def detection_moyenne(x_time, x, d=1, w=100):
     x_moyenne_time, x_moyenne, _, _ = moyenne_ecart_type_mobile(
         x_time, x, d, w)

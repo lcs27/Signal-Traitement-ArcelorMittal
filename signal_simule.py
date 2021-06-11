@@ -2,6 +2,9 @@ from numpy.lib.polynomial import _polyint_dispatcher
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+# Ce document sert à définir les différents signal simulés
+
 def simulation_rupture_moyenne(points=1000,mean1=0,mean2=3,std1=0.1,std2=0.1):
     # construction et connexion de deux parties
     samples1 = np.random.normal(mean1 , std1 , size=points )

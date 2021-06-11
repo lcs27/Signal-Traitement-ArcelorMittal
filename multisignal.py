@@ -4,6 +4,8 @@ from detection import *
 from test_detection import *
 import copy
 
+# Ce document sert à réaliser les codes concernant les votes majoritaire
+
 def detect2changement(x_detect,x_detect_time,mode=0): # mode =0 : milieu, mode = 1: premier
     x_detect = np.array(x_detect) * np.array(x_detect_time)
     changement=[]

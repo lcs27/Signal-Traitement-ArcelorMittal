@@ -4,13 +4,7 @@ from test_detection import *
 from detection import *
 from multisignal import *
 import math
-'''
-def pente_feature(signal,w=100):
-    coeff1 = np.polyfit(signal[-w:],1)[0]
-    coeff2 = np.polyfit(signal[-2*w:-w],1)[0]
-    return abs(coeff1-coeff2)
-'''
-
+# Ce document sert à réaliser les prédictions 
 
 def seuil_mobile(x_detect, pourcentage=0.9, multiple=3):
     seuil = [0]

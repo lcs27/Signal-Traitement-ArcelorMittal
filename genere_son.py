@@ -4,6 +4,7 @@ import numpy as np
 
 
 ##Ce document sert à générer le son utilisé pour analyse spéctral de sous-échantillonnage.
+
 nomfichier='./fichiers/sonbruit.wav'
 monson=wave.open(nomfichier,'wb')
 ncanal=1

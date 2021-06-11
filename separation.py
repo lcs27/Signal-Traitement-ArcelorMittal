@@ -3,7 +3,7 @@ import re
 import numpy as np
 import utils
 
-
+# Ce document sert à séparer les données en plusieurs fichier
 def var_num_nom(nom_fichier):
     # Ouverture du fichier en lecture
     try:

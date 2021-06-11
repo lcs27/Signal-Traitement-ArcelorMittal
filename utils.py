@@ -3,6 +3,9 @@ import re
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+
+
+### Ce document comprend des fichiers donnés par le prof, qui sert à écrire et lire les fichiers
 # --------------------------------------------------------------------------------
 # Fonction qui lit le contenu du fichier de données. Le paramètre de la fonction
 # est :

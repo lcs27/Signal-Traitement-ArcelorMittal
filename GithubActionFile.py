@@ -13,6 +13,8 @@ args = parser.parse_args()
 task_number: int = args.task
 task_number = int(task_number)
 print(task_number)
+
+# Task version 1
 '''
 result = test_prediction(nombre=1000)
 print(result)
@@ -42,6 +44,8 @@ elif task_number == 2:
     np.savetxt("./result/resultsB"+str(task_number)+".txt",results,fmt='%i')
 '''
 
+# Task version 2
+'''
 def multitask_test_detection(multiple,std,w=100,tolerance=10,nombre=250,task = 1):
     result = np.array([0,0,0])
     for _ in range(nombre):
@@ -75,3 +79,4 @@ for multiple in [3,5,7,9,11,15,20]:
                 results.append(result)
 np.savetxt("./result/conditionsE"+str(task_number)+".txt",conditions,fmt='%10.5f')
 np.savetxt("./result/resultsE"+str(task_number)+".txt",results,fmt='%i')
+'''

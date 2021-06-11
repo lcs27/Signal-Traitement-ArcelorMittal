@@ -5,7 +5,7 @@ from scipy.io import wavfile
 from moyenne_mobile import moyenne_ecart_type_mobile
 
 
-
+# Ce doucment sert à réaliser les échantillonnage
 
 def echantillonnage_brutal(samplarate,data,N):
     n = len(data)

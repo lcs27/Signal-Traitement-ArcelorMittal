@@ -3,6 +3,8 @@ from signal_simule import *
 from math import *
 import numpy as np
 
+
+### Ce document sert à la prise de décision
 def apprentissage_seuil(x_detect,pourcentage=0.9,multiple=3):
     n = len(x_detect)
     k = int(pourcentage*n)

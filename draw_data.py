@@ -1,5 +1,9 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
+### Ce document sert à visualiser les datas.
+
+##### Visualisation 1
 '''
 results = np.loadtxt('./result/resultsA1.txt')
 conditions = np.loadtxt('./result/conditionsA1.txt')
@@ -34,7 +38,9 @@ ax[1].set_title('Fausse Alarm%')
 ax[0].legend(fontsize=5)
 ax[1].grid()
 plt.show()
-
+'''
+##### Visualisation 2
+'''
 
 results = np.loadtxt('./result/resultsD1.txt')
 
@@ -62,6 +68,7 @@ ax.legend(fontsize=5)
 ax.grid()
 plt.show()
 '''
+##### Visualisation 3
 '''
 results = np.loadtxt('./result/resultsE2.txt')
 results2 = np.loadtxt('./result/resultsF2.txt')
@@ -112,7 +119,8 @@ ax2.legend(fontsize=5,loc=0)
 ax2.grid()
 plt.show()
 '''
-
+##### Visualisation 4
+'''
 results = np.loadtxt('./result/resultsG1.txt')
 conditions = np.loadtxt('./result/conditionsG1.txt')
 
@@ -155,3 +163,4 @@ ax2.legend(fontsize=5,loc=0)
 ax2.grid()
 plt.axis([-6,6,-10,10])
 plt.show()
+'''

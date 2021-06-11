@@ -2,6 +2,8 @@ import datetime
 import re
 import numpy as np
 
+
+### Ce document comprend des fichiers donnés par le prof, qui sert à écrire et lire les fichiers
 # --------------------------------------------------------------------------------
 # Fonction qui lit le contenu du fichier de données. Le paramètre de la fonction
 # est :
