@@ -28,7 +28,7 @@ Ce dossier contient les codes d'EI - Industrial Challenge ArcelorMittal - ST4GSI
 ### Support de Github Action
 Comme de nombreux calculs sont demandés, Github Action est utilisée par nous pour effectuer certains tests.   
 [GithubActionFile.py](GithubActionFile.py): Script soumettre à Github Action pour le calcul     
-[./.github/workflows](./.github/workflows): Script sert à la communication avec Github Action
+[./.github/workflows](./.github/workflows): Script sert à la communication avec Github Action    
 [requirement.txt](requirement.txt): Environnement demandé
 ### Dossier de support
 #### data
