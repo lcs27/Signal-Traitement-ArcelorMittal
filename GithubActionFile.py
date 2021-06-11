@@ -1,4 +1,4 @@
-# This test contains the test about the
+# Ce document comprend tous les codes à faire tourner sur la machine de Github Action
 from prediction import test_prediction
 from signal_simule import *
 from detection import *

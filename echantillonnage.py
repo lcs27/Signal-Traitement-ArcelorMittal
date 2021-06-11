@@ -25,14 +25,14 @@ def echantillonnage_moyenne(samplarate,data,N):
 
 
 if __name__=="__main__":
-    nomfichier='./fichiers/sonbruit.wav'
+    nomfichier='./fichiers/son.wav'
     samplarate,data = wavfile.read(nomfichier)
     samplarate,data = echantillonnage_brutal(samplarate,data,15)
-    wavfile.write('./fichiers/sonbruitnew.wav', samplarate, np.array(data))
+    wavfile.write('./fichiers/sonnew.wav', samplarate, np.array(data))
 
     samplarate,data = wavfile.read(nomfichier)
     samplarate,data = echantillonnage_moyenne(samplarate,data,15)
-    wavfile.write('./fichiers/sonbruitmoyenne.wav', samplarate, np.array(data))
+    wavfile.write('./fichiers/sonmoyenne.wav', samplarate, np.array(data))
 
 '''
 wavefile = wave.open(nomfichier,'rb')
