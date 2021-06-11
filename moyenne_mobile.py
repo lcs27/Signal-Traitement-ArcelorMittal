@@ -3,7 +3,7 @@ from numpy.lib.function_base import median
 from utils import *
 
 
-
+# Ce document sert à calculer les moyennes mobiles etc. qui sont demandé comme task 1 dans notre fichier. 
 def moyenne_ecart_type_mobile(x_time,x,d,w,delta = 1):
     n = len(x)
     nb = int((n-w)/d)+1
