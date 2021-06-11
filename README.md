@@ -11,7 +11,7 @@ Ce dossier contient une partie du corrigé des questions de l'énoncé
 ## fichiers
 Ce dossier contient des fichiers audio utilisés dans les tests sur les effets de l'échentillonage au son  
 ## image
-Ce dossier contient toutes les images pour la visualisation de données et de tests  
+Ce dossier contient toutes les images pour la visualisation de données et de résultats de détection  
 ## result
-Ce dossier contient des résultats du diagnostic de données
+Ce dossier contient des fichiers qui enregistrent les paramètres choisis et les résultats de détection correspondants
 
